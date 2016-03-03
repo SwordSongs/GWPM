@@ -1,24 +1,24 @@
+#include <iostream>
 #include <vector>
 #include "defs.h"
 #include "util.h"
 
 using namespace std;
 
-PatternIndex::PatternIndex ( int * x, int m, int sigma )
+PatternIndex::PatternIndex ( int * x, int l, int sigma )
 {
-	sa	= new  int [m+3];
-	isa = new  int [m];
-	lcp = new  int [m];
+	sa	= new  int [l+3];
+	isa = new  int [l];
+	lcp = new  int [l];
 
-	sa[m] = sa[m+1] = sa[m+2] = 0;
+	sa[l] = sa[l+1] = sa[l+2] = 0;
+	suffixArray ( x, sa, l, sigma );
 
-	suffixArray ( x, sa, m, sigma );
-
-	for ( int i = 0; i < m; i++ )
+	for ( int i = 0; i < l; i++ )
 		isa[ sa[i] ] = i;
 	lcp[0] = 0;
 	int j = 0;
-	for ( int i = 0; i < m; i++ )
+	for ( int i = 0; i < l; i++ )
 	{
 		if ( isa[i] != 0 )
 		{

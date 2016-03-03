@@ -27,11 +27,11 @@ void match ( vector<int> * Occ )
 	{
 		for ( j = 0; j < m; j++ )
 			xx[i*(m+1)+j] = patternlist[i].str[j];
-		xx[(i+1)*m] = sigma + 1;
+		xx[(i+1)*(m+1)-1] = sigma + 1;
 	}
 	xx[M] = xx[M+1] = xx[M+2] = 0;
 
-	PatternIndex I ( xx, M, sigma );
+	PatternIndex I ( xx, M, sigma+1 );
 
 	vector<int> v ( M, 0 );
 	for ( i = 0; i < M; i++ )
