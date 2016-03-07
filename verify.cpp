@@ -7,7 +7,7 @@ void compare (  int a,  int b, vector<int> * x )
 {
 	for ( int i = 0; i < sigma; i++ )
 	{
-		if ( pattern[a][i] == text[b][i] )
+		if ( pattern[a][i] >= z && text[b][i] >= z )
 		{
 			x->push_back (i );
 		}
