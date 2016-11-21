@@ -47,5 +47,6 @@ int read ( string filename, char mod );
 void suffixArray ( int * s, int * SA, int n, int K );
 void match ( vector<int> *Occ );
 void validlist ( int a, int q, Pstr ps, vector <Pstr> * list, char mod );
-bool verify ( int a, int b, double pp, double tp );
+//bool verify ( int a, int b, double pp, double tp );
+bool verify ( int pos_text, vector<Pstr> &patternlist);
 int LCP ( vector<int> x, int a, int* xx, int b );

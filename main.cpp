@@ -23,7 +23,6 @@ int main ( int argc, char ** argv )
 	string text_file;
 	string output_file;
 	int num_Occ;
-	vector<int> Occ;
 	ofstream result;
 
 	clock_t start, finish;
@@ -78,40 +77,80 @@ int main ( int argc, char ** argv )
 		}
 	}
 	/* read input */
-	if ( ! read ( pattern_file, 'p' ) )
-	{
-		return 0;
-	}
-	if ( ! read ( text_file, 't' ) )
+//	if ( read ( pattern_file, 'p' ) < 0)
+//	{
+//		return 0;
+//	}
+	if ( ! read ( text_file, 't' ) < 0 )
 	{
 		return 0;
 	}
 
+	ifstream input_pattern ( pattern_file );
+	result.open ( output_file );
+	
 	start = clock();
+	cout << "begin" << endl;
+	while ( true )
+	{
+		string temp;
+		vector<int> Occ;
+		input_pattern >> temp;
+		if ( input_pattern.eof() ) break;
+		double ** dna;
+		m = 8;
+		dna = new double * [8];
+		for ( int i = 0; i < 8; i++ )
+		{
+			dna[i] = new double [4];
+			dna[i][0] = dna[i][1] = dna[i][2] = dna[i][3] = 0;
+			switch ( temp[i] )
+			{
+				case 'A':
+					dna[i][0] = 1;
+					break;
+				case 'C':
+					dna[i][1] = 1;
+					break;
+				case 'G':
+					dna[i][2] = 1;
+					break;
+				case 'T':
+					dna[i][3] = 1;
+					break;
+			}
+		}
+		pattern = dna;
+		match ( &Occ );
 
-	match ( &Occ );
+		num_Occ = Occ.size();
 
+		//	cout << "Pattern length:" << m << "\tText length:"<< n << '\n';
+		//	cout << "Number of Occurrences:" << num_Occ << '\n';
+		//	cout << "Position of Occurrences:\n";
+		//		for ( int i = 0; i < num_Occ; i++ )
+		//			cout << Occ[i] << '\n';
+		//	result.open ( output_file );
+		result << temp << ':';
+		if ( num_Occ == 0 )
+		{
+			result << "No found.\n";
+		}
+		else
+		{
+			//		result << "Position of Occurrences:\n";
+			for ( int i = 0; i < num_Occ; i++ )
+				result << Occ[i] << ' ';
+			result << '\n';
+		}
+		for ( int i = 0; i < 8; i++ )
+			delete[] dna[i];
+		delete[] dna;
+	}
 	finish = clock();
-
 	double elapsed_time = ( ( double ) finish - start ) / CLOCKS_PER_SEC;
 
-	num_Occ = Occ.size();
-
-	cout << "Pattern length:" << m << "\tText length:"<< n << '\n';
-	cout << "Number of Occurrences:" << num_Occ << '\n';
 	cout << "Elapsed time:" << elapsed_time << "s\n";
-	
-	result.open ( output_file );
-	if ( num_Occ == 0 )
-	{
-		result << "No occurrences is found.\n";
-	}
-	else
-	{
-		result << "Position of Occurrences:\n";
-		for ( int i = 0; i < num_Occ; i++ )
-			result << Occ[i] << '\n';
-	}
 
 	return 1;
 }

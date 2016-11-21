@@ -1,8 +1,10 @@
 #include <vector>
+#include <iostream>
 #include "globals.h"
 
 using namespace std;
 
+#if 0
 void compare (  int a,  int b, vector<int> * x )
 {
 	for ( int i = 0; i < sigma; i++ )
@@ -37,3 +39,27 @@ bool verify (  int a,  int b, double pp, double tp )
 	}
 	return flag;
 }
+#endif
+
+#if 1
+bool verify ( int pos_text, vector<Pstr> &patternlist )
+{
+	int num_pattern = patternlist.size();
+	for ( int i = 0; i < num_pattern; i++ )
+	{
+		double p = 1;
+		for ( int j = 0; j < m; j++ )
+		{
+			p *= text[pos_text+j][patternlist[i].str[j]-1];
+			if ( p < z )
+				break;
+		}
+		if ( p < z )
+			continue;
+		else
+			return true;
+	}
+	return false;
+}
+			
+#endif

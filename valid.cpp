@@ -1,5 +1,6 @@
 #include <vector>
 #include <string>
+#include <iostream>
 
 #include "defs.h"
 #include "globals.h"
@@ -19,7 +20,7 @@ void validlist ( int a, int q, Pstr ps, vector<Pstr> * list, char mod )
 		{
 			for ( int i = 0; i < sigma; i++ )
 			{
-				if ( p * text[a][i] > z )
+				if ( p * text[a][i] >= z )
 				{
 					Pstr ps2;
 					ps2.pro = p * text[a][i];
@@ -33,7 +34,7 @@ void validlist ( int a, int q, Pstr ps, vector<Pstr> * list, char mod )
 		{
 			for ( int i = 0; i < sigma; i++ )
 			{
-				if ( p * pattern[a][i] > z )
+				if ( p * pattern[a][i] >= z )
 				{
 					Pstr ps3;
 					ps3.pro = p * pattern[a][i];

@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
 #include <cmath>
+#include <ctime>
 
 #include <sdsl/rmq_support.hpp>
 
@@ -12,9 +13,11 @@ using namespace sdsl;
 
 void match ( vector<int> * Occ )
 {
+	clock_t start, finish;
 	int i, j, k;
-	int q = ceil ( 3 * log(m) / log(2) );
+	int q = 4;
 
+	start = clock();
 	Pstr wps;
 	wps.pro = 1;
 	vector<Pstr> patternlist;
@@ -30,13 +33,13 @@ void match ( vector<int> * Occ )
 		xx[(i+1)*(m+1)-1] = sigma + 1;
 	}
 	xx[M] = xx[M+1] = xx[M+2] = 0;
-
 	PatternIndex I ( xx, M, sigma+1 );
 
 	vector<int> v ( M, 0 );
 	for ( i = 0; i < M; i++ )
 		v[i] = I.LCP(i);
 	rmq_succinct_sct<> rmq ( &v );
+	finish = clock();
 
 	i = 0;
 	j = m - q;
@@ -45,9 +48,7 @@ void match ( vector<int> * Occ )
 		Pstr qstr;
 		qstr.pro = 1;
 		vector<Pstr> qlist;
-
 		validlist ( j, j+q, qstr, &qlist, 't' );
-
 		int flag = 0;
 		for ( k = 0; k < qlist.size(); k++ )
 		{
@@ -120,7 +121,7 @@ void match ( vector<int> * Occ )
 		if ( flag )
 		{
 			/* verify */
-			if ( verify ( 0, i, 1, 1 ) )
+			if ( verify ( i, patternlist ) )
 			{
 				Occ->push_back ( i );
 			}
@@ -130,15 +131,11 @@ void match ( vector<int> * Occ )
 		else
 		{
 			/* skip */
-			i += m - q;
-			j += m - q;
+			i += m - q + 1;
+			j += m - q + 1;
 		}
 		vector<Pstr>().swap ( qlist );
 	}
 }
-			
-	
-
-									
 
 

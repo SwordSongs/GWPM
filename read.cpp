@@ -30,7 +30,6 @@ int read ( string filename, char mod )
 			if ( !name.empty() )
 			{
 				//Print out what we read from the last entry
-//				cout << name << " : " << content.size() << std::endl;
 				name.clear();
 			}
 			if ( !line.empty() )
@@ -52,7 +51,7 @@ int read ( string filename, char mod )
 		}
 	}
 
-	 int length = content.size();
+	int length = content.size();
 	double ** dna;
 	dna = new double * [length];
 	for (  int i = 0; i < length; i++ )
@@ -77,8 +76,14 @@ int read ( string filename, char mod )
 				dna[i][3] = 1;
 				break;
 			case 'N':
-				x = rand() % 4;
-				dna[i][x] = 1;
+				dna[i][0] =	dna[i][1] = dna[i][2] = dna[i][3] = 0.25;
+			/*	
+				if ( m == 't' )
+				{
+					x = rand() % 4;
+					dna[i][x] = 1;
+				}
+			*/
 				break;
 			case 'R':
 				dna[i][0] = dna[i][2] = 0.5;
