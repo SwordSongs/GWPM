@@ -67,7 +67,7 @@ int decode_switches ( int argc, char * argv[], struct TSwitch * sw )
 
 void usage ( void )
 {
-	cout << "Usage: qgram <options>"  << endl;
+	cout << "Usage: GWPM <options>"  << endl;
 	cout << "Standard (Mandatory):" << endl;
 	cout << "	-p, --pattern\t<str>\tFilename for Pattern." << endl;
 	cout << "	-t, --text\t<str>\tFilename for Text." << endl;

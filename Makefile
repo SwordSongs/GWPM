@@ -6,7 +6,7 @@ CFLAGS= -g -fopenmp -msse4.2 -fomit-frame-pointer -funroll-loops
  
 LFLAGS= -std=c++11 -O3 -DNDEBUG -I ./libsdsl/include/ -L ./libsdsl/lib/ -lsdsl -ldivsufsort -ldivsufsort64 -Wl,-rpath=$(PWD)/libsdsl/lib
 
-EXE=   gwpm 
+EXE=   GWPM 
  
 SRC=    main.cpp drittel.cpp match.cpp read.cpp valid.cpp verify.cpp index.cpp input.cpp lcp.cpp
 
